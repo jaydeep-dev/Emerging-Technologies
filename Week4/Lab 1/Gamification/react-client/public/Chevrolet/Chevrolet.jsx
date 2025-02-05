@@ -698,4 +698,4 @@ export default function Model(props) {
   )
 }
 
-useGLTF.preload('Chevrolet/chevrolet.gltf')
+// useGLTF.preload('Chevrolet/chevrolet.gltf')

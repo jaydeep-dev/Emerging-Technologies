@@ -9,18 +9,20 @@ function CreateArticle(props) {
   //
   let navigate = useNavigate();
   //
-  console.log('props.screen', props.screen)
   const [article, setArticle] = useState({ _id: '', title: '', genre: '', platform: '', releaseYear: 0, developer: '', rating: 0, description: '' });
   const [showLoading, setShowLoading] = useState(false);
   //
   const apiUrl = "api/api/articles"
   //
-  const saveArticle = (e) => {
+  const saveArticle = async (e) => {
     setShowLoading(true);
     e.preventDefault();
-    const data = { title: article.title, genre: article.genre, platform: article.platform, releaseYear: article.releaseYear, developer: article.developer, rating: article.rating, description: article.description };
     //
-    axios.post(apiUrl, data)
+    const userId = await axios.get('/api/welcome')
+    
+    const data = { title: article.title, genre: article.genre, platform: article.platform, releaseYear: article.releaseYear, developer: article.developer, rating: article.rating, description: article.description };
+
+    await axios.post(apiUrl, data)
       .then((result) => {
         setShowLoading(false);
         console.log('results from save article:', result.data)

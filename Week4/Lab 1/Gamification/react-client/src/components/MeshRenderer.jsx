@@ -1,7 +1,7 @@
 import { Suspense, useEffect, useState } from "react";
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Environment } from '@react-three/drei';
-import Chevrolet from '../../public/Chevrolet/Chevrolet';
+// import Chevrolet from '../../public/Chevrolet/Chevrolet';
 import Gun1 from '../../public/Gun1/Gun1';
 import Gun2 from '../../public/Gun2/Gun2';
 import Lamborghini from '../../public/Lamborghini/Lamborghini';
@@ -17,7 +17,7 @@ function MeshRenderer() {
     const [randomModel, setRandomModel] = useState(null);
 
     const models = [
-        { component: Chevrolet, scale: 2, name: "Chevrolet" },
+        // { component: Chevrolet, scale: 2, name: "Chevrolet" },
         { component: Gun1, scale: 4, name: "Gun1" },
         { component: Gun2, scale: 4, name: "Gun2" },
         { component: Lamborghini, scale: 150, name: "Lamborghini" },

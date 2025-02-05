@@ -14,7 +14,7 @@ function getErrorMessage(err) {
     }
 };
 //
-exports.create = function (req, res) {
+exports.create = function (req, res, next) {
     const game = new Game();
     game.title = req.body.title;
     game.genre = req.body.genre;
@@ -36,21 +36,35 @@ exports.create = function (req, res) {
             });
         } else {
             console.log("Save Response", result)
-            res.status(200).json(game);
+            //res.status(200).json(game);
+            req.body = result;
+            req.isCreate = true;
+            next();
         }
     });
 };
 //
-exports.list = function (req, res) {
-    Game.find().sort('title').exec((err, articles) => {
-        if (err) {
-            return res.status(400).send({
-                message: getErrorMessage(err)
-            });
-        } else {
-            res.status(200).json(articles);
-        }
-    });
+exports.list = async function (req, res) {
+
+    let games = [];
+
+    const userData = await User.findById(req.id);
+
+    if (userData) {
+        games = userData.games;
+    }
+
+    console.log("Games filled", games);
+
+    const gameData = await Game.find({ '_id': { $in: games } }).sort('title');
+
+    if (gameData) {
+        console.log("Games in library", gameData);
+        res.status(200).json(gameData);
+    }
+    else {
+        res.status(400).json(gameData);
+    }
 };
 //
 exports.articleByID = function (req, res, next, id) {

@@ -20,7 +20,7 @@ function ListArticles(props) {
   useEffect(() => {
     const abortController = new AbortController();
     const fetchData = async () => {
-      axios.get(apiUrl, { signal: abortController.signal })
+      await axios.get(apiUrl, { signal: abortController.signal })
         .then(result => {
           console.log('result.data:', result.data)
           //check if the user has logged in

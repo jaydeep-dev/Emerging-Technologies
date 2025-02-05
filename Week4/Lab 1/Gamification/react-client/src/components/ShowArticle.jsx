@@ -15,8 +15,7 @@ function ShowArticle(props) {
   const apiUrl = "/api/api/articles/" + id;
 
   useEffect(() => {
-
-    setShowLoading(false);
+    setShowLoading(true)
     const fetchData = async () => {
       const result = await axios(apiUrl);
       console.log('results from articles', result.data);

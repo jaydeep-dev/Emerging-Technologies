@@ -4,9 +4,12 @@ import Button from 'react-bootstrap/Button';
 import './login.css'
 import axios from 'axios';
 import ListArticles from './ListArticles';
+import { useNavigate } from 'react-router-dom';
 
 function Login({ setAuthStatus }) {
-  const [screen, setScreen] = useState('auth');
+
+  let navigation = useNavigate()
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const apiUrl = "/api/signin";
@@ -18,14 +21,11 @@ function Login({ setAuthStatus }) {
       const loginData = { auth: { username, password } }
       const res = await axios.post(apiUrl, loginData);
 
-      console.log(res.data.auth)
-      console.log(res.data.screen)
-
       if (res.data.screen !== 'auth') {
-        setScreen(res.data.screen);
         console.log(res.data.screen);
         console.log("Games", res.data.games);
         setAuthStatus(true)
+        navigation('/library')
       }
     } catch (e) {
       console.log(e);
@@ -44,12 +44,10 @@ function Login({ setAuthStatus }) {
         const res = await axios.get('/api/read_cookie', { signal: abortController.signal });
         // 
         if (res.data.screen !== 'auth') {
-          setScreen(res.data.screen);
-          console.log(res.data.screen)
           setAuthStatus && setAuthStatus(true)
+          navigation('/library')
         }
       } catch (e) {
-        setScreen('auth');
         console.log(e);
         setAuthStatus && setAuthStatus(false)
       }
@@ -62,27 +60,22 @@ function Login({ setAuthStatus }) {
 
   return (
     <div className="App">
-      {screen === 'auth'
-        ? <div>
+      <div>
+        <Form >
+          <Form.Group size="lg" >
+            <Form.Label>User Name</Form.Label>
+            <Form.Control type="text" name="username" id="username" placeholder="Enter user name" onChange={e => setUsername(e.target.value)} />
+          </Form.Group>
+          <Form.Group size="lg" >
+            <Form.Label>Password:</Form.Label>
+            <Form.Control type="password" name="password" id="password" placeholder="Enter password" onChange={e => setPassword(e.target.value)} />
+          </Form.Group>
 
-          <Form >
-
-            <Form.Group size="lg" >
-              <Form.Label>User Name</Form.Label>
-              <Form.Control type="text" name="username" id="username" placeholder="Enter user name" onChange={e => setUsername(e.target.value)} />
-            </Form.Group>
-            <Form.Group size="lg" >
-              <Form.Label>Password:</Form.Label>
-              <Form.Control type="password" name="password" id="password" placeholder="Enter password" onChange={e => setPassword(e.target.value)} />
-            </Form.Group>
-
-            <Button size="lg" variant="primary" type="Button" onClick={authenticateUser}>
-              Login
-            </Button>
-          </Form>
-        </div>
-        : <ListArticles />
-      }
+          <Button size="lg" variant="primary" type="Button" onClick={authenticateUser}>
+            Login
+          </Button>
+        </Form>
+      </div>
     </div>
   );
 }
