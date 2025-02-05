@@ -20,11 +20,7 @@ function ListArticles(props) {
   useEffect(() => {
     const abortController = new AbortController();
     const fetchData = async () => {
-
-      const resp = await axios.get('/api/welcome');
-      console.log('Response of welcome', resp);
-
-      await axios.get(apiUrl, { signal: abortController.signal })
+      axios.get(apiUrl, { signal: abortController.signal })
         .then(result => {
           console.log('result.data:', result.data)
           //check if the user has logged in
@@ -50,26 +46,27 @@ function ListArticles(props) {
 
   return (
     <div>
-      {data.length !== 0
-        ? createGame ? <CreateArticle /> : <div className='MyLibraryList'>
+      {createGame ? <CreateArticle /> :
+        <div className='MyLibraryList'>
           {showLoading && <Spinner animation="border" role="status">
             <span className="sr-only">Loading...</span>
           </Spinner>}
           <ListGroup className="MyCustomGrid">
-            {data.map((item, idx) => (
+            {data.length !== 0 && data.map((item, idx) => (
               <ListGroup.Item className="Item" key={idx} action onClick={() => showDetail(item._id)}>
                 {item.title}
               </ListGroup.Item>
             ))}
 
-            <ListGroup.Item className="Item AddGame" action onClick={() => setCreateGame(true)}>
-              Add Game
-            </ListGroup.Item>
+            {!createGame &&
+              <ListGroup.Item className="Item AddGame" action onClick={() => setCreateGame(true)}>
+                Add Game
+              </ListGroup.Item>
+            }
           </ListGroup>
         </div>
-        : < Login />
       }
-    </div>
+    </div >
 
   );
 }
