@@ -9,7 +9,6 @@ function CreateArticle(props) {
   //
   let navigate = useNavigate();
   //
-  const username = props.screen;
   console.log('props.screen', props.screen)
   const [article, setArticle] = useState({ _id: '', title: '', genre: '', platform: '', releaseYear: 0, developer: '', rating: 0, description: '' });
   const [showLoading, setShowLoading] = useState(false);
@@ -39,7 +38,7 @@ function CreateArticle(props) {
 
   return (
     <div>
-      <h2> {username}, what game would you like to add to your library? </h2>
+      <h2> What game would you like to add to your library? </h2>
       <hr></hr>
       {showLoading &&
         <Spinner animation="border" role="status">

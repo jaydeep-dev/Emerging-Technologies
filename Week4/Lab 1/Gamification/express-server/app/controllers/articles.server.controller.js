@@ -42,7 +42,7 @@ exports.create = function (req, res) {
 };
 //
 exports.list = function (req, res) {
-    Game.find().sort('-title').exec((err, articles) => {
+    Game.find().sort('title').exec((err, articles) => {
         if (err) {
             return res.status(400).send({
                 message: getErrorMessage(err)
@@ -65,12 +65,13 @@ exports.articleByID = function (req, res, next, id) {
 };
 //
 exports.read = function (req, res) {
+    console.log("In read ", req.article)
     res.status(200).json(req.article);
 };
 //
 exports.update = function (req, res) {
     console.log('in update:', req.article)
-    const game = req.article;   
+    const game = req.article;
     game.title = req.body.title;
     game.genre = req.body.genre;
     game.platform = req.body.platform;

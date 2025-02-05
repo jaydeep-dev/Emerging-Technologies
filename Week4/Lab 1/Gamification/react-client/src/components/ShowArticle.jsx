@@ -40,7 +40,7 @@ function ShowArticle(props) {
     axios.delete(apiUrl, article)
       .then((result) => {
         setShowLoading(false);
-        navigate('/listarticles')
+        navigate('/library')
       }).catch((error) => setShowLoading(false));
   };
 

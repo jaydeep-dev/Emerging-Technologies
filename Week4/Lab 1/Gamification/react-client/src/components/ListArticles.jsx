@@ -4,6 +4,10 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Spinner from 'react-bootstrap/Spinner';
 import Login from './Login';
 import { useNavigate } from 'react-router-dom';
+
+import './ListGames.css'
+import CreateArticle from './CreateArticle';
+
 //
 // this component is used to list all articles
 function ListArticles(props) {
@@ -16,7 +20,11 @@ function ListArticles(props) {
   useEffect(() => {
     const abortController = new AbortController();
     const fetchData = async () => {
-      axios.get(apiUrl, { signal: abortController.signal })
+
+      const resp = await axios.get('/api/welcome');
+      console.log('Response of welcome', resp);
+
+      await axios.get(apiUrl, { signal: abortController.signal })
         .then(result => {
           console.log('result.data:', result.data)
           //check if the user has logged in
@@ -31,24 +39,32 @@ function ListArticles(props) {
     };
     fetchData();
 
-    return() => abortController.abort();
+    return () => abortController.abort();
   }, []);
 
   const showDetail = (id) => {
     navigate('/showarticle/' + id);
   }
 
+  const [createGame, setCreateGame] = useState(false);
+
   return (
     <div>
       {data.length !== 0
-        ? <div>
+        ? createGame ? <CreateArticle /> : <div className='MyLibraryList'>
           {showLoading && <Spinner animation="border" role="status">
             <span className="sr-only">Loading...</span>
           </Spinner>}
-          <ListGroup>
+          <ListGroup className="MyCustomGrid">
             {data.map((item, idx) => (
-              <ListGroup.Item key={idx} action onClick={() => { showDetail(item._id) }}>{item.title}</ListGroup.Item>
+              <ListGroup.Item className="Item" key={idx} action onClick={() => showDetail(item._id)}>
+                {item.title}
+              </ListGroup.Item>
             ))}
+
+            <ListGroup.Item className="Item AddGame" action onClick={() => setCreateGame(true)}>
+              Add Game
+            </ListGroup.Item>
           </ListGroup>
         </div>
         : < Login />

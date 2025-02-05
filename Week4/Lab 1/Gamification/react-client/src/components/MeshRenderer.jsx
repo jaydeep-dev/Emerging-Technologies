@@ -11,7 +11,7 @@ import Wolf from '../../public/Wolf/Wolf';
 import Xbox from '../../public/Xbox/Xbox';
 import Whale from '../../public/Whale/Whale';
 
-import './SkullRender.css';
+import './MeshRender.css';
 
 function MeshRenderer() {
     const [randomModel, setRandomModel] = useState(null);

@@ -1,0 +1,47 @@
+.MyLibraryList .MyCustomGrid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 1400px;
+    margin: 20px auto;
+    flex-direction: row;
+}
+
+.MyCustomGrid .Item {
+    width: 200px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgb(2, 0, 36);
+    background: radial-gradient(circle, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    flex-shrink: 0;
+    margin: 0;
+    border-radius: 50px !important;
+    border-width: 10%;
+    border-color: red;
+}
+
+.MyCustomGrid .Item:hover {
+    width: 210px;
+    height: 310px;
+    color: white;
+    font-size: 150%;
+    font-weight: bold;
+}
+
+.AddGame {
+    background: rgb(191, 191, 191) !important;
+    background: radial-gradient(circle, rgba(191, 191, 191, 1) 0%, rgba(113, 113, 113, 1) 34%, rgba(22, 22, 22, 1) 100%) !important;
+}
+
+.list-group-item {
+    display: inline-flex !important;
+    width: auto;
+    padding: 0;
+}

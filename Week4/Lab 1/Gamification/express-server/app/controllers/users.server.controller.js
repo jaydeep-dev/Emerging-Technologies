@@ -91,7 +91,7 @@ exports.userByID = function (req, res, next, id) {
 };
 //update a user by id
 exports.update = function(req, res, next) {
-    console.log(req.body);
+    console.log(req.game);
     User.findByIdAndUpdate(req.user.id, req.body, function (err, user) {
       if (err) {
         console.log(err);
@@ -132,7 +132,7 @@ exports.authenticate = function(req, res, next) {
 				// set the cookie as the token string, with a similar max age as the token
 				// here, the max age is in milliseconds
 				res.cookie('token', token, { maxAge: jwtExpirySeconds * 1000,httpOnly: true});
-				res.status(200).send({ screen: user.username });
+				res.status(200).send(user);
 				//
 				//res.json({status:"success", message: "user found!!!", data:{user:
 				//user, token:token}});
@@ -180,7 +180,8 @@ exports.welcome = (req, res) => {
 	// Finally, return the welcome message to the user, along with their
 	// username given in the token
 	// use back-quotes here
-	res.send(`${payload.username}`)
+	console.log("Payload", payload)
+	res.send(`${payload.id}`)
  };
  //
  //sign out function in controller

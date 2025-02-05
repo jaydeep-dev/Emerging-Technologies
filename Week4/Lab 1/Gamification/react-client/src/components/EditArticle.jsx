@@ -94,7 +94,7 @@ function EditArticle(props) {
 
 
         <Button variant="primary" type="submit">
-          Update Article
+          Update Game
         </Button>
       </Form>
     </div>

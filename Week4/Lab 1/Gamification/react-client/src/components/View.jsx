@@ -24,30 +24,6 @@ function View(props) {
       console.log(e);
     }
   };
-  // called when user clicks on Verify Cookie button
-  // end-point demonstrates another example for the use
-  // of cookie specific response from the server.
-  const verifyCookie = async () => {
-    try {
-      const res = await axios.get('/api/welcome');
-      console.log(res.data)
-      setData(res.data);
-    } catch (e) {
-      console.log(e);
-    }
-  }
-  //
-  const listArticles = (username) => {
-
-    console.log('in listArticles: ', username)
-
-  }
-  //
-  const createArticle = () => {
-    console.log('in createArticle')
-
-  }
-  //
   return (
     <div className="App">
       {

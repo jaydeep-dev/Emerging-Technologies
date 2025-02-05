@@ -24,7 +24,7 @@ function CreateUser(props) {
       axios.post(apiUrl, data)
       .then((result) => {
         setShowLoading(false);
-        navigate('/show/' + result.data._id)
+        navigate('/library')
       }).catch((error) => setShowLoading(false));
   };
   // handles onChange event

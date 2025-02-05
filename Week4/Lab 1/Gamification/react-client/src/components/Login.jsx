@@ -2,49 +2,40 @@ import React, { useState, useEffect } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import './login.css'
-// 
 import axios from 'axios';
-//
-import View from './View'
-//
-// this is the login component
-function App(props) {
-  //state variable for the screen, admin or user
+import ListArticles from './ListArticles';
+
+function Login({ setAuthStatus }) {
   const [screen, setScreen] = useState('auth');
-  //store input field data, user name and password
-  const [username, setUsername] = useState();
-  const [password, setPassword] = useState();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const apiUrl = "/api/signin";
-  //send username and password to the server
-  // for initial authentication
+
   const authenticateUser = async () => {
     console.log('calling auth')
     console.log(username)
     try {
-      //make a get request to /authenticate end-point on the server
       const loginData = { auth: { username, password } }
-      //call api
       const res = await axios.post(apiUrl, loginData);
+
       console.log(res.data.auth)
       console.log(res.data.screen)
-      //process the response
-      if (res.data.screen !== undefined) {
+
+      if (res.data.screen !== 'auth') {
         setScreen(res.data.screen);
         console.log(res.data.screen);
+        console.log("Games", res.data.games);
+        setAuthStatus(true)
       }
-    } catch (e) { //print the error
+    } catch (e) {
       console.log(e);
+      setAuthStatus(false)
     }
-
   };
 
-
-  //runs the first time the view is rendered
-  //to check if user is signed in
   useEffect(() => {
     const abortController = new AbortController();
 
-    //check if the user already logged-in
     const readCookie = async () => {
       try {
         console.log('--- in readCookie function ---');
@@ -52,21 +43,23 @@ function App(props) {
         //
         const res = await axios.get('/api/read_cookie', { signal: abortController.signal });
         // 
-        if (res.data.screen !== undefined) {
+        if (res.data.screen !== 'auth') {
           setScreen(res.data.screen);
           console.log(res.data.screen)
+          setAuthStatus && setAuthStatus(true)
         }
       } catch (e) {
         setScreen('auth');
         console.log(e);
+        setAuthStatus && setAuthStatus(false)
       }
     };
 
     readCookie();
 
-    return() => abortController.abort();
-  }, []); //only the first render
-  //
+    return () => abortController.abort();
+  }, []);
+
   return (
     <div className="App">
       {screen === 'auth'
@@ -87,14 +80,12 @@ function App(props) {
               Login
             </Button>
           </Form>
-
-
         </div>
-        : <View screen={screen} setScreen={setScreen} />
+        : <ListArticles />
       }
     </div>
   );
 }
 //
-export default App;
+export default Login;
 
