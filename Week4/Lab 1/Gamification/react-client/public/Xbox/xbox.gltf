@@ -1,0 +1,209 @@
+{
+  "accessors": [
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 22155,
+      "max": [
+        78.67024993896484,
+        30.253732681274414,
+        76.97522735595703
+      ],
+      "min": [
+        -77.14662170410156,
+        -72.2755355834961,
+        -1.4756759405136108
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 265860,
+      "componentType": 5126,
+      "count": 22155,
+      "max": [
+        0.9997969269752502,
+        0.9999780654907227,
+        0.9999996423721313
+      ],
+      "min": [
+        -0.9999364018440247,
+        -0.9999998807907104,
+        -0.9999880790710449
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 22155,
+      "max": [
+        0.9730960130691528,
+        0.9849900007247925
+      ],
+      "min": [
+        0.015010000206530094,
+        0.009844000451266766
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 120000,
+      "type": "SCALAR"
+    }
+  ],
+  "asset": {
+    "extras": {
+      "author": "Laser Design (https://sketchfab.com/Laserdesign)",
+      "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "source": "https://sketchfab.com/3d-models/xbox-wireless-controller-3d-scan-data-a3279a520f2d4143863c118f50b23a2d",
+      "title": "Xbox Wireless Controller 3D Scan Data"
+    },
+    "generator": "Sketchfab-12.66.0",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 480000,
+      "name": "floatBufferViews",
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 177240,
+      "byteOffset": 480000,
+      "byteStride": 8,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 531720,
+      "byteOffset": 657240,
+      "byteStride": 12,
+      "name": "floatBufferViews",
+      "target": 34962
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 1188960,
+      "uri": "xbox.bin"
+    }
+  ],
+  "extensionsRequired": [
+    "KHR_materials_pbrSpecularGlossiness"
+  ],
+  "extensionsUsed": [
+    "KHR_materials_pbrSpecularGlossiness"
+  ],
+  "images": [
+    {
+      "uri": "textures/material_0_diffuse.jpeg"
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "extensions": {
+        "KHR_materials_pbrSpecularGlossiness": {
+          "diffuseFactor": [
+            0.7805908945282323,
+            0.7805908945282323,
+            0.7805908945282323,
+            1.0
+          ],
+          "diffuseTexture": {
+            "index": 0
+          },
+          "glossinessFactor": 0.6800991128717508,
+          "specularFactor": [
+            0.026902532104621756,
+            0.026902532104621756,
+            0.026902532104621756
+          ]
+        }
+      },
+      "name": "material_0"
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Object_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 1,
+            "POSITION": 0,
+            "TEXCOORD_0": 2
+          },
+          "indices": 3,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1
+      ],
+      "matrix": [
+        1.0,
+        4.126967196043847e-17,
+        1.5542650917977485e-16,
+        0.0,
+        -1.232595164407831e-32,
+        -0.9665090441703797,
+        0.25663259625434853,
+        0.0,
+        1.6081226229577292e-16,
+        -0.25663259625434853,
+        -0.9665090441703797,
+        0.0,
+        -6.106226635438361e-15,
+        27.13045501708983,
+        62.88869857788087,
+        1.0
+      ],
+      "name": "Sketchfab_model"
+    },
+    {
+      "children": [
+        2
+      ],
+      "name": "Xbox Wireless Controller mm.obj.cleaner.materialmerger.gles"
+    },
+    {
+      "mesh": 0,
+      "name": "Object_2"
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9987,
+      "wrapS": 10497,
+      "wrapT": 10497
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "Sketchfab_Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0
+    }
+  ]
+}

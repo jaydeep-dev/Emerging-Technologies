@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Demonstrating fetch method</title>
+    </head>
+    <!-- Load Babel -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <!-- Your custom script here -->
+    <script type="text/babel" data-presets="es2016,es2017,stage-2, stage-3">
+        let url = "https://api.randomuser.me/?nat=US&results=1"
+        //let url='https://api.github.com/orgs/nodejs'
+        fetchAsync(url)
+            .then(response => response.json())
+            .then(data => {
+
+                //handle the response
+                console.log(JSON.stringify(data))
+                document.getElementById('output').innerHTML = JSON.stringify(data) + "<br>";;
+
+            })
+            .catch(error => {
+                // handle the error
+                document.getElementById('output').innerHTML = JSON.stringify(error) + "<br>";;
+
+            });
+
+        const fetchAsync = async (url) => {
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error("error: " + response.status);
+                }
+
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                throw new Error(error);
+            }
+        };
+    </script>
+    <body>
+        <div id="output"></div>
+
+    </body>
+</html>

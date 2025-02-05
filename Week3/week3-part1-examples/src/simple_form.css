@@ -1,0 +1,10 @@
+@media all and (min-width: 480px) {
+    .simple_form {
+      padding: 10px 0;
+    }
+  
+    .simple_form form {
+      margin: 0 auto;
+      max-width: 600px;
+    }
+  }
