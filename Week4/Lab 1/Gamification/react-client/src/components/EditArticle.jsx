@@ -81,7 +81,7 @@ function EditArticle(props) {
         </Form.Group>
         <br />
         <Form.Group>
-          <Form.Label> Rating</Form.Label>
+          <Form.Label> Rating ({article.rating})</Form.Label>
           <Form.Control class="form-range" min="0" max="5" step="0.5" type='range' name="rating" id="rating" placeholder="Enter rating" value={article.rating} onChange={onChange} />
         </Form.Group>
         <br></br>

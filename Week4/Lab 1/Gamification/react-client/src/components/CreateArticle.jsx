@@ -4,6 +4,9 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import './CreateGames.css'
+
 // this component is used to create a new article
 function CreateArticle(props) {
   //
@@ -18,7 +21,6 @@ function CreateArticle(props) {
     setShowLoading(true);
     e.preventDefault();
     //
-    const userId = await axios.get('/api/welcome')
     
     const data = { title: article.title, genre: article.genre, platform: article.platform, releaseYear: article.releaseYear, developer: article.developer, rating: article.rating, description: article.description };
 
@@ -41,7 +43,7 @@ function CreateArticle(props) {
   return (
     <div>
       <h2> What game would you like to add to your library? </h2>
-      <hr></hr>
+      <hr />
       {showLoading &&
         <Spinner animation="border" role="status">
           <span className="sr-only">Loading...</span>
@@ -74,7 +76,7 @@ function CreateArticle(props) {
         </Form.Group>
         <br />
         <Form.Group>
-          <Form.Label> Rating</Form.Label>
+          <Form.Label> Rating ({article.rating})</Form.Label>
           <Form.Control class="form-range" min="0" max="5" step="0.5" type='range' name="rating" id="rating" placeholder="Enter rating" value={article.rating} onChange={onChange} />
         </Form.Group>
         <br></br>
