@@ -1,0 +1,40 @@
+.navbar {
+  display: flex;
+  justify-content: space-around; /* Space between links */
+  align-items: center; /* Vertically center the links */
+  width: 100%; /* Adjust the width of the navbar */
+  margin: 0 auto; /* Center the navbar horizontally */
+  background-color: #282c34;
+  padding: 1rem;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+}
+
+.logout-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.logout-button:hover {
+  text-decoration: underline;
+}
+
+/* Center the welcome and profile text */
+.text-center {
+  text-align: center;
+}
+
+.mt-5 {
+  margin-top: 3rem;
+}

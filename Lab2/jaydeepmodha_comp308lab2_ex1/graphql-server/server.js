@@ -1,12 +1,10 @@
-// server.js is the entry point for the GraphQL server. 
-// It connects to MongoDB, creates an Apollo Server, and starts
-// the server on port 4000.
 require('dotenv').config(); // Load environment variables
 const { ApolloServer } = require('@apollo/server');
-const { startStandaloneServer } = require('@apollo/server/standalone');
+const { expressMiddleware } = require('@apollo/server/express4');
 const configureMongoose = require('./config/mongoose');
 const cookieParser = require('cookie-parser');
 const express = require('express');
+const cors = require('cors'); // Import CORS middleware
 const typeDefs = require('./graphql/typeDefs');
 const resolvers = require('./graphql/resolvers');
 const jwt = require('jsonwebtoken');
@@ -33,27 +31,45 @@ const startServer = async () => {
   // Step 1: Connect to MongoDB
   await configureMongoose();
 
-  // Step 2: Create Express app for cookie handling
+  // Step 2: Create Express app
   const app = express();
+
+  // Step 3: Add middleware
   app.use(cookieParser()); // Parse cookies
   app.use(authMiddleware); // Add authentication middleware
 
-  // Step 3: Create Apollo Server
+  // Enable CORS with best practices
+  app.use(
+    cors({
+      origin: 'http://localhost:3000', // Replace with your frontend's URL
+      credentials: true, // Allow cookies to be sent with requests
+    })
+  );
+
+  // Step 4: Create Apollo Server
   const server = new ApolloServer({
     typeDefs,
     resolvers,
-    context: ({ req, res }) => ({ req, res }), // Pass req and res to resolvers
   });
 
-  // Step 4: Start Apollo Server with Express
-  const { url } = await startStandaloneServer(server, {
-    listen: { port: 4000 },
-    context: async ({ req, res }) => ({ req, res }), // Pass req and res to Apollo context
-  });
+  // Start Apollo Server
+  await server.start();
 
-  console.log(`🚀 GraphQL server ready at ${url}`);
+  // Use Apollo Server as middleware with Express
+  app.use(
+    '/graphql',
+    express.json(), // Parse JSON requests
+    expressMiddleware(server, {
+      context: async ({ req, res }) => ({ req, res }), // Pass req and res to resolvers
+    })
+  );
+
+  // Step 5: Start the Express server
+  const PORT = process.env.PORT || 4000;
+  app.listen(PORT, () => {
+    console.log(`🚀 Server is running at http://localhost:${PORT}/graphql`);
+  });
 };
 
 // Start the server
 startServer();
-

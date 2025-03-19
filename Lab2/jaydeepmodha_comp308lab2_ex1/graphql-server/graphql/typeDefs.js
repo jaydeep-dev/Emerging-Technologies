@@ -1,8 +1,3 @@
-// typeDefs.js is a file that contains the GraphQL 
-// schema definition language (SDL) that defines the types, 
-// queries, and mutations that the GraphQL server supports. 
-// The schema is defined using the GraphQL schema definition 
-// language (SDL).
 const typeDefs = `#graphql
   scalar Date
 
@@ -44,6 +39,7 @@ const typeDefs = `#graphql
   type Query {
     # User queries
     getUser(id: ID!): User
+    getCurrentUser: User # Fetch the current logged-in user
 
     # Tournament queries
     getTournament(id: ID!): Tournament
@@ -59,6 +55,9 @@ const typeDefs = `#graphql
     createUser(username: String!, password: String!, email: String!, role: Role!): User
     updateUser(id: ID!, username: String, password: String, email: String, role: Role): User
     deleteUser(id: ID!): String
+
+    # Login mutation
+    login(username: String!, password: String!): String
 
     # Tournament mutations
     createTournament(name: String!, game: String!, date: Date!, status: TournamentStatus!): Tournament

@@ -1,0 +1,19 @@
+.tournament-card {
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.tournament-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.tournament-card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #007bff;
+}
+
+.tournament-card-text {
+    font-size: 1rem;
+    color: #6c757d;
+}

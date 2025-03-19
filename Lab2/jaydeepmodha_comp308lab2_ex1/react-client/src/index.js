@@ -1,17 +1,41 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+
+// Create an HTTP link to the GraphQL server
+const httpLink = createHttpLink({
+  uri: 'http://localhost:4000/graphql', // Replace with your GraphQL server URL
+  credentials: 'include', // Include cookies in requests
+});
+
+// Middleware to dynamically add the token to the headers
+const authLink = setContext((_, { headers }) => {
+  const token = document.cookie
+    .split('; ')
+    .find((row) => row.startsWith('token='))
+    ?.split('=')[1];
+
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    },
+  };
+});
+
+// Create Apollo Client
+const client = new ApolloClient({
+  link: authLink.concat(httpLink), // Combine authLink and httpLink
+  cache: new InMemoryCache(),
+});
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <ApolloProvider client={client}>
+      <App />
+    </ApolloProvider>
   </React.StrictMode>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();

@@ -1,9 +1,11 @@
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const { GraphQLScalarType, Kind } = require('graphql');
 const User = require('../models/User'); // Assuming you have a User model
 const Tournament = require('../models/Tournament'); // Assuming you have a Tournament model
 const Player = require('../models/Player'); // Assuming you have a Player schema
-const { default: mongoose } = require('mongoose');
+
+const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret';
 
 const resolvers = {
   Date: new GraphQLScalarType({
@@ -27,6 +29,36 @@ const resolvers = {
   }),
 
   Query: {
+
+    getCurrentUser: async (_, __, { req }) => {
+      try {
+        console.log('Request:', req);
+        // Check if the token exists in the request headers
+        const token = req.headers.authorization?.split(' ')[1];
+        if (!token) {
+          throw new Error('No token provided');
+        }
+
+        // Verify the token
+        const decoded = jwt.verify(token, JWT_SECRET);
+        if (!decoded) {
+          throw new Error('Invalid token');
+        }
+
+        // Fetch the user from the database
+        const user = await User.findById(decoded.id);
+        if (!user) {
+          throw new Error('User not found');
+        }
+
+        // Return the user details
+        return user;
+      } catch (error) {
+        console.error('Error fetching current user:', error);
+        throw new Error('Failed to fetch current user');
+      }
+    },
+
     // Fetch a user by ID
     getUser: async (_, { id }) => {
       try {
@@ -303,6 +335,34 @@ const resolvers = {
       } catch (error) {
         console.error('Error fetching player:', error);
         throw new Error('Failed to fetch player');
+      }
+    },
+
+    login: async (_, { username, password }) => {
+      try {
+        // Find the user by username
+        const user = await User.findOne({ username });
+        if (!user) {
+          throw new Error('Invalid username or password');
+        }
+
+        // Check if the password is correct
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        if (!isPasswordValid) {
+          throw new Error('Invalid username or password');
+        }
+
+        // Generate a JWT token
+        const token = jwt.sign(
+          { id: user._id, username: user.username, role: user.role },
+          JWT_SECRET,
+          { expiresIn: '1h' }
+        );
+
+        return token; // Return the JWT token
+      } catch (error) {
+        console.error('Error during login:', error);
+        throw new Error('Failed to login');
       }
     },
   },

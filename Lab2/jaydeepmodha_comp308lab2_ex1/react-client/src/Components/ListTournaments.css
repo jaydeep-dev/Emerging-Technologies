@@ -1,0 +1,13 @@
+/* filepath: d:\Centennial College\Sem 4 (Winter 2025)\EmergingTechnologies\Lab2\jaydeepmodha_comp308lab2_ex1\react-client\src\Components\ListTournaments.css */
+
+.tournament-container {
+    margin-top: 50px;
+}
+
+.tournament-title {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #343a40;
+}
