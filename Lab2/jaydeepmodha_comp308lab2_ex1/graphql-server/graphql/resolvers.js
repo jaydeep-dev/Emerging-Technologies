@@ -91,7 +91,7 @@ const resolvers = {
     getAllTournaments: async () => {
       try {
         // Populate players and their associated user details
-        const tournaments = await Tournament.find()
+        const tournaments = await Tournament.find().populate()
           .populate({
             path: 'players',
             populate: {

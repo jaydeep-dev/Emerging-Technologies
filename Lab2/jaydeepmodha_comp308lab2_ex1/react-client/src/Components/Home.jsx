@@ -8,13 +8,14 @@ import Signup from './Signup';
 // Admin Components
 import CreateUser from './CreateUser';
 import CreateTournament from './CreateTournament';
-import ListPlayers from './ListPlayers';
+import ListPlayers from './ListUsers';
 
 // User Components
 import ListTournaments from './ListTournaments';
 import MyTournaments from './MyTournaments';
 
 import './Home.css';
+import ThreeDBackground from './ThreeDBackground';
 
 // Define the GET_CURRENT_USER query
 const GET_CURRENT_USER = gql`

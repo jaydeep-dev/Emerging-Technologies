@@ -1,0 +1,11 @@
+/* Style for the canvas container */
+.canvas-container {
+  position: fixed; /* Fix the background to the viewport */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Ensure it stays behind all other content */
+  background-color: #ffffff; /* Black background for better contrast */
+  overflow: hidden;
+}

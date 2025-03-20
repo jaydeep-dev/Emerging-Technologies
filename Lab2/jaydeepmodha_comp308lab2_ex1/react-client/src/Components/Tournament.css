@@ -2,17 +2,18 @@
     transition: transform 0.2s, box-shadow 0.2s;
     min-height: 300px;
     border-radius: 20px;
+    border: 1px solid #007bff;
 }
 
 .tournament-card:hover {
     transform: scale(1.05);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.404);
 }
 
 .tournament-card-title {
     font-size: 1.5rem;
     font-weight: bold;
-    color: #007bff;
+    color: #013c7c;
 }
 
 .tournament-card-text {
