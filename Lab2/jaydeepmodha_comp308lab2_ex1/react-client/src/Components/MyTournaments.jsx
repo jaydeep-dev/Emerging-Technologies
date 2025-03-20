@@ -60,6 +60,7 @@ const MyTournaments = ({ currentUser }) => {
                 tournamentId={tournament.id}
                 currentUser={currentUser}
                 isJoinable={false}
+                showEditBtn={false}
               />
             ))
           )

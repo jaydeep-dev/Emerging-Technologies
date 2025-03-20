@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Col, Button, Spinner } from 'react-bootstrap';
 import { gql, useMutation, useQuery } from '@apollo/client';
+import EditTournament from './EditTournament'; // Import the EditTournament component
 import './Tournament.css'; // Reuse the existing styles
 
 // Define the createPlayer mutation
@@ -28,7 +29,7 @@ const GET_TOURNAMENT = gql`
   }
 `;
 
-const Tournament = ({ tournamentId, currentUser, isJoinable }) => {
+const Tournament = ({ tournamentId, currentUser, isJoinable, showEditBtn }) => {
   const [createPlayer, { loading: createLoading, error: createError }] = useMutation(CREATE_PLAYER);
   const { data, loading: fetchLoading, error: fetchError, refetch } = useQuery(GET_TOURNAMENT, {
     variables: { id: tournamentId },
@@ -37,6 +38,7 @@ const Tournament = ({ tournamentId, currentUser, isJoinable }) => {
 
   const [hasJoined, setHasJoined] = useState(!isJoinable); // Track if the user has joined
   const [playerCount, setPlayerCount] = useState(0); // Track player count
+  const [showEditModal, setShowEditModal] = useState(false);
 
   // Update player count when data is fetched
   useEffect(() => {
@@ -70,6 +72,14 @@ const Tournament = ({ tournamentId, currentUser, isJoinable }) => {
       console.error('Error joining tournament:', err);
       alert('Failed to join the tournament. Please try again.');
     }
+  };
+
+  const handleEdit = () => {
+    setShowEditModal(true);
+  };
+
+  const handleCloseEditModal = () => {
+    setShowEditModal(false);
   };
 
   if (fetchLoading) {
@@ -114,9 +124,23 @@ const Tournament = ({ tournamentId, currentUser, isJoinable }) => {
           >
             {hasJoined ? 'Joined' : createLoading ? 'Joining...' : 'Join Tournament'}
           </Button>
+          {currentUser?.role === 'ADMIN' && showEditBtn && ( // Conditionally render the Edit button for ADMIN users
+            <Button
+            variant="warning"
+            onClick={handleEdit}
+            >
+              Edit
+            </Button>
+          )}
           {createError && <p className="text-danger mt-2">Error: {createError.message}</p>}
         </Card.Body>
       </Card>
+      <EditTournament
+        tournament={data.getTournament}
+        show={showEditModal}
+        handleClose={handleCloseEditModal}
+        refetch={refetch}
+      />
     </Col>
   );
 };

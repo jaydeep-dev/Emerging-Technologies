@@ -28,7 +28,7 @@ const GET_ALL_PLAYERS = gql`
 `;
 
 const ListTournaments = ({ currentUser }) => {
-  const { loading, error, data, refetch } = useQuery(GET_ALL_TOURNAMENTS, {
+  const { loading, error, data } = useQuery(GET_ALL_TOURNAMENTS, {
     fetchPolicy: 'network-only', // Always fetch fresh data from the server
   });
 
@@ -74,6 +74,7 @@ const ListTournaments = ({ currentUser }) => {
                 tournamentId={tournament.id}
                 currentUser={currentUser}
                 isJoinable={isJoinable}
+                showEditBtn={true}
               />
             );
           })
