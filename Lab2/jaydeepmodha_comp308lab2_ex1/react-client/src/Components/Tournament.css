@@ -1,5 +1,7 @@
 .tournament-card {
     transition: transform 0.2s, box-shadow 0.2s;
+    min-height: 300px;
+    border-radius: 20px;
 }
 
 .tournament-card:hover {

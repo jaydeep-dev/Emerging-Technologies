@@ -32,7 +32,7 @@ const resolvers = {
 
     getCurrentUser: async (_, __, { req }) => {
       try {
-        console.log('Request:', req);
+        
         // Check if the token exists in the request headers
         const token = req.headers.authorization?.split(' ')[1];
         if (!token) {
@@ -76,7 +76,7 @@ const resolvers = {
     // Fetch a tournament by ID
     getTournament: async (_, { id }) => {
       try {
-        const tournament = await Tournament.findById(id);
+        const tournament = await Tournament.findById(id).populate('players');
         if (!tournament) {
           throw new Error(`Tournament with ID ${id} not found`);
         }
@@ -90,7 +90,7 @@ const resolvers = {
     // Fetch all tournaments
     getAllTournaments: async () => {
       try {
-        const tournaments = await Tournament.find();
+        const tournaments = await Tournament.find().populate('players');
         return tournaments;
       } catch (error) {
         console.error('Error fetching tournaments:', error);
@@ -315,7 +315,7 @@ const resolvers = {
     },
     fetchTournament: async (_, { id }) => {
       try {
-        const tournament = await Tournament.findById(id);
+        const tournament = await Tournament.findById(id).populate('players');
         if (!tournament) {
           throw new Error(`Tournament with ID ${id} not found`);
         }

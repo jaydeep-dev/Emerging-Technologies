@@ -23,7 +23,6 @@ const Login = ({ setIsAuthenticated }) => {
     const [login, { loading }] = useMutation(LOGIN_MUTATION, {
         onCompleted: (data) => {
             document.cookie = `token=${data.login}; path=/;`; // Set the token cookie
-            document.cookie = `username=${formData.username}; path=/;`; // Set the username cookie
             console.log('document.cookie:', document.cookie);
             setIsAuthenticated(true); // Update authentication state
             navigate('/'); // Redirect to the home page

@@ -1,4 +1,3 @@
-import React from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { Container, Row, Spinner, Alert } from 'react-bootstrap';
 import Tournament from './Tournament'; // Import the Tournament component
@@ -9,18 +8,35 @@ const GET_ALL_TOURNAMENTS = gql`
   query GetAllTournaments {
     getAllTournaments {
       id
-      name
-      game
-      date
-      status
     }
   }
 `;
 
-const ListTournaments = () => {
-  const { loading, error, data } = useQuery(GET_ALL_TOURNAMENTS);
+// GraphQL query to fetch all players
+const GET_ALL_PLAYERS = gql`
+  query GetAllPlayers {
+    getAllPlayers {
+      id
+      user {
+        id
+      }
+      tournaments {
+        id
+      }
+    }
+  }
+`;
 
-  if (loading) {
+const ListTournaments = ({ currentUser }) => {
+  const { loading, error, data, refetch } = useQuery(GET_ALL_TOURNAMENTS, {
+    fetchPolicy: 'network-only', // Always fetch fresh data from the server
+  });
+
+  const AllPlayerQuery = useQuery(GET_ALL_PLAYERS, {
+    fetchPolicy: 'network-only', // Always fetch fresh data from the server
+  });
+
+  if (loading || AllPlayerQuery.loading) {
     return (
       <Container className="text-center mt-5">
         <Spinner animation="border" role="status">
@@ -38,13 +54,32 @@ const ListTournaments = () => {
     );
   }
 
+  // Extract the list of tournament IDs joined by the current user
+  const joinedTournamentIds = AllPlayerQuery.data.getAllPlayers
+    .filter((player) => player.user.id === currentUser.id) // Filter players for the current user
+    .flatMap((player) => player.tournaments.map((tournament) => tournament.id)); // Extract tournament IDs
+
   return (
     <Container className="tournament-container">
       <h1 className="tournament-title">All Tournaments</h1>
       <Row>
-        {data.getAllTournaments.map((tournament) => (
-          <Tournament key={tournament.id} tournament={tournament} />
-        ))}
+        {data.getAllTournaments.length > 0 ? (
+          data.getAllTournaments.map((tournament) => {
+            // Check if the tournament ID exists in the joinedTournamentIds array
+            const isJoinable = !joinedTournamentIds.includes(tournament.id);
+
+            return (
+              <Tournament
+                key={tournament.id}
+                tournamentId={tournament.id}
+                currentUser={currentUser}
+                isJoinable={isJoinable}
+              />
+            );
+          })
+        ) : (
+          <p className="text-center mt-5">There are no tournaments going on! Check back later!</p>
+        )}
       </Row>
     </Container>
   );
