@@ -4,9 +4,15 @@ import { Navbar, Nav, Container, Spinner } from 'react-bootstrap';
 import { gql, useLazyQuery } from '@apollo/client';
 import Login from './Login';
 import Signup from './Signup';
-import ListTournaments from './ListTournaments';
+
+// Admin Components
+import CreateUser from './CreateUser';
 import CreateTournament from './CreateTournament';
+
+// User Components
+import ListTournaments from './ListTournaments';
 import MyTournaments from './MyTournaments';
+
 import './Home.css';
 
 // Define the GET_CURRENT_USER query
@@ -82,7 +88,10 @@ function Home() {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               {isAuthenticated && currentUser && currentUser?.role === 'ADMIN' && (
-                <Nav.Link as={Link} to="/create-tournament">Create Tournament</Nav.Link>
+                <>
+                  <Nav.Link as={Link} to="/create-user">Create User</Nav.Link>
+                  <Nav.Link as={Link} to="/create-tournament">Create Tournament</Nav.Link>
+                </>
               )}
               {isAuthenticated ? (
                 <>
@@ -106,9 +115,18 @@ function Home() {
         <Route path="/" element={<Welcome user={currentUser} />} />
         <Route path="/login" element={isAuthenticated ? <Navigate to="/" /> : <Login setIsAuthenticated={setIsAuthenticated} />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/tournaments" element={isAuthenticated && <ListTournaments currentUser={currentUser} />} />
-        <Route path='/create-tournament' element={currentUser && currentUser.role === 'ADMIN' && <CreateTournament />} />
-        <Route path='/my-tournaments' element={isAuthenticated && <MyTournaments currentUser={currentUser} />} />
+        {currentUser && currentUser.role === 'ADMIN' && (
+          <>
+            <Route path='/create-user' element={<CreateUser />} />
+            <Route path='/create-tournament' element={<CreateTournament />} />
+          </>
+        )}
+        {isAuthenticated && (
+          <>
+            <Route path="/tournaments" element={<ListTournaments currentUser={currentUser} />} />
+            <Route path='/my-tournaments' element={<MyTournaments currentUser={currentUser} />} />
+          </>
+        )}
       </Routes>
     </div>
   );
@@ -121,7 +139,7 @@ function Welcome({ user }) {
       <>
         <h1 className="text-center mt-5">Welcome to Game Tournament, {user?.username}!</h1>
         <p>
-          To join tournament go to List Tournaments and click on the tournament you want to join.
+          To join tournament go to List Tournaments and click join tournament button.
         </p>
       </>
     );
