@@ -8,6 +8,7 @@ import Signup from './Signup';
 // Admin Components
 import CreateUser from './CreateUser';
 import CreateTournament from './CreateTournament';
+import ListPlayers from './ListPlayers';
 
 // User Components
 import ListTournaments from './ListTournaments';
@@ -90,13 +91,14 @@ function Home() {
               {isAuthenticated && currentUser && currentUser?.role === 'ADMIN' && (
                 <>
                   <Nav.Link as={Link} to="/create-user">Create User</Nav.Link>
+                  <Nav.Link as={Link} to="/list-players">List Players</Nav.Link>
                   <Nav.Link as={Link} to="/create-tournament">Create Tournament</Nav.Link>
                 </>
               )}
               {isAuthenticated ? (
                 <>
                   <Nav.Link as={Link} to="/my-tournaments">My Tournaments</Nav.Link>
-                  <Nav.Link as={Link} to="/tournaments">List Tournaments</Nav.Link>
+                  <Nav.Link as={Link} to="/list-tournaments">List Tournaments</Nav.Link>
                   <Nav.Link onClick={handleLogout}>Logout</Nav.Link> {/* Converted to Nav.Link */}
                 </>
               ) : (
@@ -118,15 +120,17 @@ function Home() {
         {currentUser && currentUser.role === 'ADMIN' && (
           <>
             <Route path='/create-user' element={<CreateUser />} />
+            <Route path='/list-players' element={<ListPlayers />} />
             <Route path='/create-tournament' element={<CreateTournament />} />
           </>
         )}
         {isAuthenticated && (
           <>
-            <Route path="/tournaments" element={<ListTournaments currentUser={currentUser} />} />
+            <Route path="/list-tournaments" element={<ListTournaments currentUser={currentUser} />} />
             <Route path='/my-tournaments' element={<MyTournaments currentUser={currentUser} />} />
           </>
         )}
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </div>
   );

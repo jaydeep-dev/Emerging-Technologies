@@ -90,7 +90,16 @@ const resolvers = {
     // Fetch all tournaments
     getAllTournaments: async () => {
       try {
-        const tournaments = await Tournament.find().populate('players');
+        // Populate players and their associated user details
+        const tournaments = await Tournament.find()
+          .populate({
+            path: 'players',
+            populate: {
+              path: 'user', // Populate the user field inside players
+              model: 'User',
+            },
+          });
+
         return tournaments;
       } catch (error) {
         console.error('Error fetching tournaments:', error);
