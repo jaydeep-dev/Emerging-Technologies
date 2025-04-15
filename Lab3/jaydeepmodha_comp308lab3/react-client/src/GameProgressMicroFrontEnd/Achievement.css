@@ -1,0 +1,53 @@
+/* Container styles */
+.achievement-container {
+    margin: 2rem auto;
+    max-width: 90%;
+}
+
+/* Card styles */
+.achievement-card {
+    border-width: 3px 0px 3px 0px;
+    border-radius: 50px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Card title */
+.achievement-title {
+    font-size: 5rem;
+    font-weight: bold;
+    color: #FF8400;
+    text-align: center;
+}
+
+/* Card text */
+.achievement-text {
+    font-size: 2rem;
+    color: #FFD93D;
+    text-align: center;
+}
+
+/* Progress bar container */
+.achievement-bars {
+    margin-top: 2rem;
+}
+
+/* Progress bar styles */
+.achievement-progress-bar {
+    height: 30px;
+    background-color: #d6d6d6; /* Trail color */
+}
+
+.achievement-progress-bar .progress-bar {
+    background-color: #FF8400; /* Path color */
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #FFD93D; /* Text color */
+}
+
+/* Achievement label */
+.achievement-label {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 0.5rem;
+}

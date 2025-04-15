@@ -1,0 +1,96 @@
+/* Container styles */
+.leaderboard-container {
+    margin: 2rem auto;
+    max-width: 90%;
+}
+
+/* Card styles */
+.leaderboard-card {
+    border-width: 3px 0px 3px 0px;
+    border-radius: 50px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Card title */
+.leaderboard-title {
+    font-size: 5rem;
+    font-weight: bold;
+    color: #FF8400;
+    text-align: center;
+}
+
+/* Card text */
+.leaderboard-text {
+    font-size: 2rem;
+    color: #FFD93D;
+    text-align: center;
+}
+
+/* Table styles */
+.leaderboard-table {
+    margin-top: 2rem;
+    font-size: 1.5rem;
+    text-align: center;
+    background-color: #282c34; /* Dark background for contrast */
+    color: white; /* White text for readability */
+    border-radius: 10px;
+    overflow: hidden;
+    width: 100%; /* Make the table span the full width */
+    table-layout: fixed; /* Ensure columns are evenly spaced */
+}
+
+.leaderboard-table th,
+.leaderboard-table td {
+    word-wrap: break-word; /* Ensure text wraps within cells */
+    text-align: center; /* Center-align text */
+}
+
+.leaderboard-table th {
+    background-color: #FF8400;
+    color: white;
+    font-weight: bold;
+}
+
+.leaderboard-table td {
+    background-color: #333;
+    color: #FFD93D;
+}
+
+.leaderboard-table tr:hover {
+    background-color: #c00000;
+    color: #FFD93D;
+}
+
+/* Highlight the current player's row */
+.current-player-row td{
+    background-color: #FFD93D; /* Highlight color */
+    color: #282c34; /* Text color for contrast */
+    font-weight: bold;
+}
+
+.current-player-row:hover {
+    background-color: #FF8400; /* Change color on hover */
+    color: white;
+}
+
+/* Responsive table container */
+.table-responsive {
+    margin-top: 1rem;
+}
+
+/* Keyframe animation for drop-in effect from behind */
+@keyframes drop-in-behind {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.leaderboard-row {
+    animation: drop-in-behind 1s ease-out;
+}

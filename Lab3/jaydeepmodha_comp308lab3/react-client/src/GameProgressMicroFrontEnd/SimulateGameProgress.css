@@ -1,0 +1,67 @@
+/* Container styles */
+.simulate-game-progress-container {
+    margin: 2rem auto;
+    max-width: 90%;
+}
+
+/* Card styles */
+.simulate-game-progress-card {
+    border-width: 3px 0px 3px 0px;
+    border-radius: 50px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Card title */
+.simulate-game-progress-title {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #FF8400;
+    text-align: center;
+}
+
+/* Card body */
+.simulate-game-progress-body {
+    background-color: #282c34; /* Dark background for contrast */
+    border-radius: 20px;
+    padding: 2rem;
+}
+
+/* Form label */
+.simulate-game-progress-body .form-label {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #FFD93D;
+}
+
+/* Form control */
+.simulate-game-progress-body .form-control {
+    background-color: #333;
+    color: #FFD93D;
+    border: 1px solid #FFD93D;
+    border-radius: 10px;
+}
+
+/* Form control focus */
+.simulate-game-progress-body .form-control:focus {
+    background-color: #444;
+    color: #FFD93D;
+    border-color: #FF8400;
+    box-shadow: 0 0 5px #FF8400;
+}
+
+/* Submit button */
+.simulate-game-progress-body .btn-primary {
+    background-color: #FF8400;
+    border-color: #FF8400;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 0.5rem 2rem;
+    border-radius: 10px;
+}
+
+/* Submit button hover */
+.simulate-game-progress-body .btn-primary:hover {
+    background-color: #FFD93D;
+    border-color: #FFD93D;
+    color: #282c34;
+}

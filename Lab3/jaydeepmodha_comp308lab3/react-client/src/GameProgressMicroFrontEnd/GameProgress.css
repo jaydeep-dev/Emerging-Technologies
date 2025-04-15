@@ -1,0 +1,77 @@
+/* Container styles */
+.game-progress-container {
+    margin: 2rem auto;
+    max-width: fit-content;
+}
+
+/* Card styles */
+.game-progress-card {
+    border-width: 3px 0px 3px 0px;
+    border-radius: 50px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Card title */
+.game-progress-title {
+    font-size: 5rem;
+    font-weight: bold;
+    color: #FF8400;
+    text-align: center;
+}
+
+/* Card text */
+.game-progress-text {
+    font-size: 2rem;
+    color: #FFD93D;
+    text-align: center;
+}
+
+.game-progress-dials {
+    margin-top: 5rem;
+    padding: 2rem;
+}
+
+/* Radial progress bar container */
+.radial-progress-container {
+    display: flex;
+    justify-content: center;
+    margin: 3rem;
+}
+
+/* Radial dial styles */
+.radial-dial {
+    width: 300px; /* Size of the dial */
+    height: 300px; /* Size of the dial */
+    border-radius: 50%; /* Ensures the shadow is circular */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effects */
+    box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.5); /* Default circular shadow */
+}
+
+/* Hover effect for radial dial */
+.radial-dial:hover {
+    transform: scale(1.1); /* Slightly enlarge the dial */
+    box-shadow: 0px 0px 30px #FF840055; /* Enhanced shadow on hover */
+}
+
+.game-progress-body {
+    background-color: #282c34; /* Dark background for contrast */
+    border-radius: 20px;
+}
+
+/* Label styles */
+.game-progress-label {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #FFD93D; /* Yellow color for labels */
+    margin-right: 0.5rem;
+}
+
+/* Value styles */
+.game-progress-value {
+    font-size: 1.2rem;
+    font-weight: normal;
+    color: #FFFFFF; /* White color for values */
+    background-color: #333; /* Dark background for contrast */
+    padding: 0.2rem 0.5rem;
+    border-radius: 5px;
+}
